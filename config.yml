@@ -1,0 +1,28 @@
+server:
+  host: "0.0.0.0"
+  port: 8080
+  mode: "release"  # release / debug
+  node_rate_limit: 50  # max requests per IP per 5min window (0 = disable)
+
+database:
+  driver: "postgres"
+  dsn: "host=localhost user=k2board password=CHANGE_ME dbname=k2board port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+  # MySQL: driver: "mysql"  dsn: "user:pass@tcp(localhost:3306)/k2board?charset=utf8mb4&parseTime=true"
+
+# Redis — 生产环境推荐开启
+redis:
+  enabled: true
+  addr: "localhost:6379"
+  password: ""
+  db: 0
+
+scheduler:
+  flush_interval: 60
+  stats_interval: 300
+  auto_disable_interval: 60  # expired users + stale online purge
+
+jwt:
+  expire_hours: 24
+
+admin:
+  email: "admin@k2board.com"

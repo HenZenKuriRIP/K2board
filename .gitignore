@@ -1,0 +1,64 @@
+# === Binary ===
+/k2board
+
+# === Database (runtime data) ===
+*.db
+*.sqlite
+*.sqlite3
+
+# === Secrets / local runtime (never commit) ===
+.env
+.env.*
+!.env.example
+web_user/.env
+web_user/.env.*
+!web_user/.env.example
+# Local panel config may contain real DSN passwords after install
+config.local.yml
+config.yml.local
+*.pem
+*.key
+!deploy/*.example.conf
+
+# === Local e2e / test config backups (do not commit) ===
+config.yml.e2e-used.yml
+config.yml.pre-e2e.bak
+*.e2e-used.yml
+*.pre-e2e.bak
+
+# === Internal / local only ===
+gemini_audit.md
+k2board.db
+
+# === Frontend build artifacts ===
+web/dist/
+web/node_modules/
+web/release_builds/
+web_user/release_builds/
+
+# === IDE / Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === OS generated files ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# === Claude Code (AI assistant internals) ===
+.claude/
+
+# === Temporary files ===
+tmp/
+temp/
+*.log
+release_builds/
+web_user/dist/
+web_user/node_modules/

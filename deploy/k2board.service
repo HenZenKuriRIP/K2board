@@ -1,0 +1,14 @@
+[Unit]
+Description=K2Board
+After=network.target
+
+[Service]
+Type=simple
+User=k2board
+WorkingDirectory=/opt/k2board
+ExecStart=/opt/k2board/k2board
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

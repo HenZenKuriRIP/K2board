@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+  k2board:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config.yml:/app/config.yml
+      - k2board_data:/app/data
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+
+  # 可选 Redis (取消注释以启用)
+  # redis:
+  #   image: redis:7-alpine
+  #   restart: always
+  #   volumes:
+  #     - redis_data:/data
+
+volumes:
+  k2board_data:
+  # redis_data:

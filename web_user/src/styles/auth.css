@@ -1,0 +1,498 @@
+/* ═══════════════════════════════════════════════════
+   Auth pages — photo-first background + solid glass cards
+   No top brand bar (leave space for art logo); no mid-page hero text
+   ═══════════════════════════════════════════════════ */
+
+.auth-page {
+  --rose: #f43f5e;
+  --rose-hot: #e11d48;
+  /* Semi-opaque frosted panel — not fully transparent */
+  --glass-bg: linear-gradient(
+    165deg,
+    rgba(28, 18, 48, 0.88) 0%,
+    rgba(18, 12, 36, 0.92) 55%,
+    rgba(14, 10, 28, 0.94) 100%
+  );
+  --glass-border: rgba(255, 255, 255, 0.16);
+  --input-bg: rgba(8, 6, 18, 0.55);
+  --input-border: rgba(255, 255, 255, 0.14);
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  color: #f8fafc;
+  overflow-x: hidden;
+  isolation: isolate;
+}
+
+/* Stage: card only — vertically centered (iPad was stuck to bottom) */
+.auth-page .stage {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: min(1400px, 100%);
+  margin: 0 auto;
+  padding: clamp(24px, 5vh, 56px) clamp(16px, 4vw, 48px);
+  box-sizing: border-box;
+  min-height: 0;
+}
+.auth-page .stage-card-only {
+  /* Desktop/tablet: vertical center; leave left open for art logo */
+  justify-content: flex-end;
+  align-items: center;
+  /* do NOT push card to bottom — that broke iPad */
+  padding-top: clamp(20px, 4vh, 56px);
+  padding-bottom: clamp(20px, 4vh, 56px);
+}
+.auth-page .panel {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  /* Wider panel so card feels less “tiny” on desktop */
+  max-width: min(480px, 100%);
+  margin: auto 0;
+  animation: auth-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes auth-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Card — larger, airier glass panel */
+.auth-page .card {
+  position: relative;
+  width: 100%;
+  max-width: min(460px, 100%);
+  padding: clamp(28px, 3.2vw, 40px) clamp(24px, 2.8vw, 36px) clamp(22px, 2.4vw, 30px);
+  border-radius: clamp(18px, 2vw, 24px);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 18px 56px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  backdrop-filter: blur(22px) saturate(1.18);
+  -webkit-backdrop-filter: blur(22px) saturate(1.18);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.auth-page .card.card-tall {
+  max-width: min(480px, 100%);
+}
+.auth-page .card-shine {
+  display: none;
+}
+
+/* Logo + title: logo sits top-left of card */
+.auth-page .card-head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(12px, 1.5vw, 16px);
+  margin-bottom: clamp(20px, 2.4vw, 28px);
+  padding-bottom: clamp(16px, 1.8vw, 22px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.auth-page .card-logo {
+  width: clamp(48px, 5vw, 56px);
+  height: clamp(48px, 5vw, 56px);
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: none;
+}
+.auth-page .card-logo :deep(svg),
+.auth-page .card-logo svg {
+  width: 72%;
+  height: 72%;
+}
+.auth-page .card-titles {
+  min-width: 0;
+  flex: 1;
+}
+.auth-page .card-head h2 {
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: none;
+}
+.auth-page .card-head p {
+  margin: 6px 0 0;
+  font-size: clamp(13px, 1.35vw, 15px);
+  color: rgba(226, 232, 240, 0.76);
+  text-shadow: none;
+  line-height: 1.4;
+}
+
+/* Form */
+.auth-page .form {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.6vw, 18px);
+}
+.auth-page .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.auth-page .label {
+  font-size: clamp(13px, 1.25vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: rgba(248, 250, 252, 0.82);
+  padding-left: 2px;
+}
+.auth-page .input-wrap {
+  position: relative;
+  width: 100%;
+}
+.auth-page .input-ico {
+  position: absolute;
+  left: clamp(14px, 1.5vw, 18px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-size: clamp(14px, 1.4vw, 16px);
+  opacity: 0.7;
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* Inputs: taller, more breathing room */
+.auth-page .form .el-input {
+  --el-input-height: clamp(50px, 5.2vw, 56px);
+  font-size: clamp(15px, 1.45vw, 16px);
+  width: 100%;
+}
+.auth-page .form .el-input__wrapper {
+  background: var(--input-bg) !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 0 0 1.5px var(--input-border) !important;
+  padding-left: clamp(42px, 4.2vw, 48px) !important;
+  padding-right: 14px !important;
+  min-height: clamp(50px, 5.2vw, 56px) !important;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.auth-page .form .el-input__wrapper:hover {
+  background: rgba(12, 8, 24, 0.62) !important;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.24) !important;
+}
+.auth-page .form .el-input__wrapper.is-focus {
+  background: rgba(12, 8, 24, 0.72) !important;
+  /* thin border only — no outer glow ring */
+  box-shadow: inset 0 0 0 1.5px rgba(251, 113, 133, 0.6) !important;
+}
+.auth-page .form .el-input__inner {
+  color: #f8fafc !important;
+  font-weight: 500;
+  font-size: clamp(15px, 1.45vw, 16px) !important;
+  height: clamp(48px, 5vw, 54px) !important;
+  line-height: 1.4 !important;
+}
+.auth-page .form .el-input__inner::placeholder {
+  color: rgba(148, 163, 184, 0.78) !important;
+  font-size: clamp(14px, 1.35vw, 15px);
+}
+.auth-page .form .el-input__suffix,
+.auth-page .form .el-input__clear {
+  color: rgba(226, 232, 240, 0.65);
+}
+.auth-page .form .el-form-item {
+  margin-bottom: 0;
+}
+.auth-page .form .el-form-item__error {
+  color: #fecdd3;
+  padding-top: 4px;
+}
+
+.auth-page .code-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: stretch;
+}
+.auth-page .code-row .el-input {
+  flex: 1;
+  min-width: 0;
+}
+.auth-page .code-btn {
+  flex-shrink: 0;
+  min-width: clamp(112px, 14vw, 128px) !important;
+  height: clamp(50px, 5.2vw, 56px) !important;
+  border-radius: 14px !important;
+  font-size: clamp(13px, 1.3vw, 14px) !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+}
+.auth-page .code-btn:hover:not(:disabled) {
+  background: rgba(244, 63, 94, 0.28) !important;
+  border-color: rgba(251, 113, 133, 0.4) !important;
+  box-shadow: none !important;
+}
+.auth-page .code-btn:disabled {
+  opacity: 0.55;
+}
+
+.auth-page .form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 2px;
+}
+.auth-page .remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(13px, 1.3vw, 14px);
+  color: rgba(241, 245, 249, 0.82);
+  cursor: pointer;
+  user-select: none;
+}
+.auth-page .remember input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--rose-hot);
+  cursor: pointer;
+}
+.auth-page .link-muted {
+  font-size: clamp(13px, 1.3vw, 14px);
+  font-weight: 700;
+  color: #fda4af;
+  text-decoration: none;
+}
+.auth-page .link-muted:hover {
+  color: #fff;
+}
+
+.auth-page .submit {
+  margin-top: clamp(8px, 1vw, 12px);
+  width: 100%;
+  height: clamp(52px, 5.4vw, 58px);
+  border: none;
+  border-radius: 14px;
+  font-size: clamp(16px, 1.55vw, 17px);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(105deg, #fb7185 0%, #e11d48 50%, #be123c 100%);
+  box-shadow: 0 8px 24px rgba(225, 29, 72, 0.36);
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.auth-page .submit:hover:not(:disabled) {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+.auth-page .submit:disabled {
+  opacity: 0.72;
+  cursor: wait;
+}
+
+.auth-page .divider {
+  position: relative;
+  z-index: 2;
+  margin: clamp(18px, 2vw, 24px) 0 clamp(14px, 1.5vw, 18px);
+  text-align: center;
+}
+.auth-page .divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.auth-page .divider span {
+  position: relative;
+  padding: 0 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(226, 232, 240, 0.48);
+  background: transparent;
+}
+
+.auth-page .foot {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(13px, 1.35vw, 15px);
+  color: rgba(241, 245, 249, 0.78);
+  line-height: 1.5;
+}
+.auth-page .foot a {
+  color: #fecdd3;
+  font-weight: 800;
+  text-decoration: none;
+  margin: 0 2px;
+}
+.auth-page .foot a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.auth-page .foot .sep {
+  margin: 0 6px;
+  opacity: 0.45;
+}
+.auth-page .card-note {
+  margin: clamp(12px, 1.4vw, 16px) 0 0;
+  text-align: center;
+  font-size: clamp(11px, 1.15vw, 12px);
+  color: rgba(203, 213, 225, 0.52);
+  line-height: 1.45;
+}
+
+.auth-page .bottom {
+  position: relative;
+  z-index: 2;
+  padding: 10px 20px max(16px, env(safe-area-inset-bottom));
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.42);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Large desktop: roomier card on the right */
+@media (min-width: 1100px) {
+  .auth-page .stage-card-only {
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: clamp(40px, 7vw, 88px);
+    padding-left: clamp(56px, 16vw, 220px);
+  }
+  .auth-page .panel {
+    max-width: 500px;
+  }
+  .auth-page .card {
+    max-width: 480px;
+  }
+  .auth-page .card.card-tall {
+    max-width: 500px;
+  }
+}
+
+/* Desktop: card on right, vertically centered */
+@media (min-width: 900px) and (max-width: 1099.98px) {
+  .auth-page .stage-card-only {
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: clamp(28px, 5vw, 56px);
+    padding-left: clamp(40px, 12vw, 160px);
+  }
+  .auth-page .panel {
+    max-width: 460px;
+  }
+}
+
+/* iPad / tablet: centered, still spacious */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .auth-page .stage-card-only {
+    align-items: center;
+    justify-content: center;
+    padding: clamp(28px, 5vh, 56px) clamp(20px, 4vw, 40px);
+  }
+  .auth-page .panel {
+    max-width: min(460px, 94%);
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .auth-page .card {
+    max-width: 100%;
+  }
+}
+
+/* Phone: full-width but still roomy inputs */
+@media (max-width: 599.98px) {
+  .auth-page .stage-card-only {
+    align-items: center;
+    justify-content: center;
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    /* gentle bias: card a bit lower without clamping to bottom */
+    padding-top: max(6vh, env(safe-area-inset-top));
+  }
+  .auth-page .panel {
+    max-width: 100%;
+    justify-content: center;
+  }
+  .auth-page .card {
+    max-width: 100%;
+    padding: 26px 20px 20px;
+    border-radius: 18px;
+  }
+  .auth-page .form .el-input__wrapper {
+    min-height: 52px !important;
+  }
+  .auth-page .form .el-input__inner {
+    height: 50px !important;
+    font-size: 16px !important; /* avoid iOS zoom on focus */
+  }
+  .auth-page .submit {
+    height: 52px;
+    font-size: 16px;
+  }
+  .auth-page .code-btn {
+    height: 52px !important;
+  }
+}
+
+/* Very short viewports (iPad split / landscape phone): ensure scroll, not crush */
+@media (max-height: 700px) {
+  .auth-page {
+    overflow-y: auto;
+  }
+  .auth-page .stage-card-only {
+    align-items: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: auto;
+  }
+  .auth-page .card {
+    padding: 22px 20px 18px;
+  }
+  .auth-page .form {
+    gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-page .panel {
+    animation: none;
+  }
+  .auth-page .submit:hover:not(:disabled) {
+    transform: none;
+  }
+}
